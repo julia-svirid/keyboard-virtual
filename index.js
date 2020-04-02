@@ -117,10 +117,11 @@ row4.appendChild(shift2);
 let arrowUp = document.createElement('div');
 arrowUp.classList.add('key');
 arrowUp.classList.add('arrowUp');
+arrowUp.innerText = '↑';
 row4.appendChild(arrowUp);
-let upImg = document.createElement('img');
+/*let upImg = document.createElement('img');
 upImg.src = './assets/up.svg';
-arrowUp.appendChild(upImg);
+arrowUp.appendChild(upImg);*/
 
 
 /* 5th row */
@@ -171,26 +172,81 @@ row5.appendChild(ctrl2);
 let arrowleft = document.createElement('div');
 arrowleft.classList.add('key');
 arrowleft.classList.add('arrowleft');
+arrowleft.innerText = '←';
 row5.appendChild(arrowleft);
-let leftImg = document.createElement('img');
+/*let leftImg = document.createElement('img');
 leftImg.src = './assets/left.svg';
-arrowleft.appendChild(leftImg);
+arrowleft.appendChild(leftImg);*/
 
 
 
 let arrowDown = document.createElement('div');
 arrowDown.classList.add('key');
 arrowDown.classList.add('arrowDown');
+arrowDown.innerText = '↓';
 row5.appendChild(arrowDown);
-let downImg = document.createElement('img');
+/*let downImg = document.createElement('img');
 downImg.src = './assets/down.svg';
-arrowDown.appendChild(downImg);
+arrowDown.appendChild(downImg);*/
 
 
 let arrowRight = document.createElement('div');
 arrowRight.classList.add('key');
 arrowRight.classList.add('arrowRight');
+arrowRight.innerText = '→';
 row5.appendChild(arrowRight);
-let rightImg = document.createElement('img');
+/*let rightImg = document.createElement('img');
 rightImg.src = './assets/right.svg';
-arrowRight.appendChild(rightImg);
+arrowRight.appendChild(rightImg);*/
+
+let keys = document.querySelectorAll('.key');
+console.log(keys);
+
+
+
+/* functional */
+shift = false;
+shift2 = false;
+capslock = false;
+KEYBOARD.addEventListener('click', type);
+KEYBOARD.addEventListener('keydown', hover);
+
+function type(event){
+    
+    let val = event.target.textContent;
+    if (val == 'Backspace' || val == 'Capslock' || val == 'Shift' || val == 'Tab'){
+        if (val == 'Backspace'){
+            TEXTAREA.textContent = "";
+        }
+        if (val == 'Capslock') {
+            if (capslock){
+                capsIndicator.style.backgroundColor = '#e90d0d';
+                capslock = false;
+            }
+            else {
+                capsIndicator.style.backgroundColor = '#ffff';
+                capslock = true;
+            } 
+        }
+        
+        if (val == 'Tab') {
+            TEXTAREA.textContent += "       ";
+        }
+        
+    }
+     else {
+        TEXTAREA.textContent += val;
+    }
+    
+}
+
+
+function hover(event){
+    let val = event.target.textContent;
+    let btn = document.querySelectorAll('.key');
+    if (val==event.key) {
+        btn.classList.add('key:hover');
+
+    }
+}
+

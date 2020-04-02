@@ -13,6 +13,7 @@ body {
 
 .textarea {
     width: 50%;
+    height: 200px;
     margin: 10px 180px;
     border: 1px solid #888;
     resize: none;
@@ -48,6 +49,7 @@ body {
     background-color: #139177;
     transition: linear 0.1s;
     cursor: pointer;
+   
 
 }
 
@@ -55,7 +57,7 @@ body {
 .indicator {
     width: 5px;
     height: 5px;
-    
+    background-color: #ffff;
     border-radius: 50%;
 }
 
