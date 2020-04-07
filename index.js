@@ -1,8 +1,15 @@
 const parentContainer  = document.querySelector('.main');
 
+
+
 const CONTAINER = document.createElement('div');
 CONTAINER.classList.add('container'); 
 parentContainer.appendChild(CONTAINER);
+
+const title = document.createElement('h1');
+title.classList.add('h1');
+title.textContent = 'RSS VIRTUAL KEYBOARD'
+CONTAINER.appendChild(title);
 
 const TEXTAREA = document.createElement('textarea');
 TEXTAREA.classList.add('textarea');
@@ -199,26 +206,30 @@ console.log(keys);
 /* functional */
 shift = false;
 shift2 = false;
-capsLock = false;
+capsLock = 0;
 KEYBOARD.addEventListener('click', type);
 
 
 function type(event){
-    
+
     let val = event.target.textContent;
+
     if (val == 'Backspace' || val == 'Capslock' || val == 'Shift' || val == 'Tab' || val == 'Enter'){
+
         if (val == 'Backspace'){
-         TEXTAREA.textContent=TEXTAREA.textContent.substring(0, str.length - 1);
+            let str = TEXTAREA.textContent;
+            TEXTAREA.textContent = TEXTAREA.textContent.substring(0, str.length - 1); 
         }
 
         if (val == 'Capslock') {
-            if (capsLock){
+            if (capsLock == 1){
                 capsIndicator.style.backgroundColor = '#e90d0d';
-                capsLock = false;
+                capsLock = 0;
+                console.log(capsIndicator);
             }
-            else {
+            else if (capslock == 0){
                 capsIndicator.style.backgroundColor = '#ffff';
-                capsLock = true;
+                capsLock = 1;
             } 
         }
         
@@ -231,6 +242,7 @@ function type(event){
         }
         
     }
+
      else {
         TEXTAREA.textContent += val;
     }
@@ -240,12 +252,14 @@ function type(event){
 
 
 
-TEXTAREA.addEventListener('keydown', (event)=> {
+ TEXTAREA.addEventListener('keydown', (event)=> {
     const keyName = event.key;
     for (let i = 0; i<keys.length; i++){
        if(keyName==keys[i].textContent)  {
         keys[i].style.backgroundColor = '#139177';
         keys[i].style.transition = 'linear 0.1s';
+        keys[i].style.boxShadow=' 0px 4px 0px rgba(0, 0, 0, 0.8)';
+
        }
     }
     
@@ -260,10 +274,9 @@ TEXTAREA.addEventListener('keyup', (event)=> {
        if(keyName==keys[i].textContent )  {
         keys[i].style.backgroundColor = '#0c6d59';
         keys[i].style.transition = 'linear 0.1s';
+        keys[i].style.boxShadow='none';
        }
     }
-    
-
 });
 
 
