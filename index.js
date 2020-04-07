@@ -15,7 +15,7 @@ CONTAINER.appendChild(KEYBOARD);
 
 let rusAlphabet = ["й","ц","у","к","е","н","г","ш","щ", "з", "х", "ъ","\\", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", "."];
 
-let engAlphabet = ['q', 'w', ' e', ' r', 't',' y', 'u', 'i', 'o', 'p','[',']','\\','a','s','d','f','g','h','j','k','l',';',"'",'z','x',"c","v","b","n","m",",",".","/"];
+let engAlphabet = ['q', 'w', 'e', 'r', 't','y', 'u', 'i', 'o', 'p','[',']','\\','a','s','d','f','g','h','j','k','l',';',"'",'z','x',"c","v","b","n","m",",",".","/"];
 
 
 const row = document.createElement('div');
@@ -223,7 +223,7 @@ function type(event){
         }
         
         if (val == 'Tab') {
-            TEXTAREA.textContent += '\t';
+            TEXTAREA.textContent += '        ';
         }
 
         if (val == 'Enter') {
@@ -245,6 +245,7 @@ TEXTAREA.addEventListener('keydown', (event)=> {
     for (let i = 0; i<keys.length; i++){
        if(keyName==keys[i].textContent)  {
         keys[i].style.backgroundColor = '#139177';
+        keys[i].style.transition = 'linear 0.1s';
        }
     }
     
@@ -256,10 +257,13 @@ TEXTAREA.addEventListener('keydown', (event)=> {
 TEXTAREA.addEventListener('keyup', (event)=> {
     const keyName = event.key;
     for (let i = 0; i<keys.length; i++){
-       if(keyName==keys[i].textContent)  {
+       if(keyName==keys[i].textContent )  {
         keys[i].style.backgroundColor = '#0c6d59';
+        keys[i].style.transition = 'linear 0.1s';
        }
     }
     
 
 });
+
+
