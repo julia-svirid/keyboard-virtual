@@ -1,8 +1,15 @@
 const parentContainer  = document.querySelector('.main');
 
+
+
 const CONTAINER = document.createElement('div');
 CONTAINER.classList.add('container'); 
 parentContainer.appendChild(CONTAINER);
+
+const title = document.createElement('h1');
+title.classList.add('h1');
+title.textContent = 'RSS VIRTUAL KEYBOARD'
+CONTAINER.appendChild(title);
 
 const TEXTAREA = document.createElement('textarea');
 TEXTAREA.classList.add('textarea');
@@ -15,7 +22,7 @@ CONTAINER.appendChild(KEYBOARD);
 
 let rusAlphabet = ["й","ц","у","к","е","н","г","ш","щ", "з", "х", "ъ","\\", "ф", "ы", "в", "а", "п", "р", "о", "л", "д", "ж", "э", "я", "ч", "с", "м", "и", "т", "ь", "б", "ю", "."];
 
-let engAlphabet = ['q', 'w', ' e', ' r', 't',' y', 'u', 'i', 'o', 'p','[',']','\\','a','s','d','f','g','h','j','k','l',';',"'",'z','x',"c","v","b","n","m",",",".","/"];
+let engAlphabet = ['q', 'w', 'e', 'r', 't','y', 'u', 'i', 'o', 'p','[',']','\\','a','s','d','f','g','h','j','k','l',';',"'",'z','x',"c","v","b","n","m",",",".","/"];
 
 
 const row = document.createElement('div');
@@ -117,10 +124,9 @@ row4.appendChild(shift2);
 let arrowUp = document.createElement('div');
 arrowUp.classList.add('key');
 arrowUp.classList.add('arrowUp');
+arrowUp.innerText = '↑';
 row4.appendChild(arrowUp);
-let upImg = document.createElement('img');
-upImg.src = './assets/up.svg';
-arrowUp.appendChild(upImg);
+
 
 
 /* 5th row */
@@ -171,26 +177,106 @@ row5.appendChild(ctrl2);
 let arrowleft = document.createElement('div');
 arrowleft.classList.add('key');
 arrowleft.classList.add('arrowleft');
+arrowleft.innerText = '←';
 row5.appendChild(arrowleft);
-let leftImg = document.createElement('img');
-leftImg.src = './assets/left.svg';
-arrowleft.appendChild(leftImg);
+
 
 
 
 let arrowDown = document.createElement('div');
 arrowDown.classList.add('key');
 arrowDown.classList.add('arrowDown');
+arrowDown.innerText = '↓';
 row5.appendChild(arrowDown);
-let downImg = document.createElement('img');
-downImg.src = './assets/down.svg';
-arrowDown.appendChild(downImg);
+
 
 
 let arrowRight = document.createElement('div');
 arrowRight.classList.add('key');
 arrowRight.classList.add('arrowRight');
+arrowRight.innerText = '→';
 row5.appendChild(arrowRight);
-let rightImg = document.createElement('img');
-rightImg.src = './assets/right.svg';
-arrowRight.appendChild(rightImg);
+
+
+let keys = document.querySelectorAll('.key');
+console.log(keys);
+
+
+
+/* functional */
+shift = false;
+shift2 = false;
+capsLock = 0;
+KEYBOARD.addEventListener('click', type);
+
+
+function type(event){
+
+    let val = event.target.textContent;
+
+    if (val == 'Backspace' || val == 'Capslock' || val == 'Shift' || val == 'Tab' || val == 'Enter'){
+
+        if (val == 'Backspace'){
+            let str = TEXTAREA.textContent;
+            TEXTAREA.textContent = TEXTAREA.textContent.substring(0, str.length - 1); 
+        }
+
+        if (val == 'Capslock') {
+            if (capsLock == 1){
+                capsIndicator.style.backgroundColor = '#e90d0d';
+                capsLock = 0;
+                console.log(capsIndicator);
+            }
+            else if (capslock == 0){
+                capsIndicator.style.backgroundColor = '#ffff';
+                capsLock = 1;
+            } 
+        }
+        
+        if (val == 'Tab') {
+            TEXTAREA.textContent += '        ';
+        }
+
+        if (val == 'Enter') {
+            TEXTAREA.textContent += '\r\n';
+        }
+        
+    }
+
+     else {
+        TEXTAREA.textContent += val;
+    }
+    
+}
+
+
+
+
+ TEXTAREA.addEventListener('keydown', (event)=> {
+    const keyName = event.key;
+    for (let i = 0; i<keys.length; i++){
+       if(keyName==keys[i].textContent)  {
+        keys[i].style.backgroundColor = '#139177';
+        keys[i].style.transition = 'linear 0.1s';
+        keys[i].style.boxShadow=' 0px 4px 0px rgba(0, 0, 0, 0.8)';
+
+       }
+    }
+    
+
+});
+
+
+
+TEXTAREA.addEventListener('keyup', (event)=> {
+    const keyName = event.key;
+    for (let i = 0; i<keys.length; i++){
+       if(keyName==keys[i].textContent )  {
+        keys[i].style.backgroundColor = '#0c6d59';
+        keys[i].style.transition = 'linear 0.1s';
+        keys[i].style.boxShadow='none';
+       }
+    }
+});
+
+
